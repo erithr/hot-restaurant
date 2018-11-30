@@ -10,6 +10,10 @@ var PORT = 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const tables= [
+
+]
+
 
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "index.html"));
@@ -21,7 +25,14 @@ app.get("/", function(req, res) {
   app.get("/tables", function(req, res) {
     res.sendFile(path.join(__dirname, "viewTable.html"));
   });
+app.post("/api/tables", function(req, res){
+    const newReservation = req.body
+console.log(newReservation);
+    tables.push(newReservation);
 
+    res.json(newReservation);
+
+})
 
 
 
