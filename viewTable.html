@@ -19,6 +19,7 @@
         </div>
         <div class="current-reservations">
             <h1>Current Reservations</h1>
+            <div id="reservation-display"></div>
             <hr>
         </div>
         <div class="wait-list">
@@ -26,10 +27,22 @@
             <hr>
         </div>
     </div>
-    <script src="server.js"></script>
     <script src='https://code.jquery.com/jquery-3.3.1.min.js' integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=' crossorigin='anonymous'></script>
-    <script>
-        $(".current-reservations")
+    <script type="text/javascript">
+
+        ($.get("/api/tables", function (data) {
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i]);
+                const tableList = $("<li class='list-group-item'>");
+
+                tableList.append($("<h2>").text("Name: " + data[i].customerName));
+                tableList.append($("<h3>").text("Phone Number: " + data[i].phoneNumber));
+                tableList.append($("<h3>").text("Email: " + data[i].customerEmail));
+                tableList.append($("<h3>").text("Id: " + data[i].customerId));
+
+                $("#reservation-display").append(tableList);
+            }
+        }));
     </script>
 </body>
 
